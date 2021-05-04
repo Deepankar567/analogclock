@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>analog clock</title>
+    <style>
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            position: absolute;
+            background-color: #bdf5ff;
+            margin: 0;
+            padding: 0;
+        }
+        #clock{
+            border: aqua solid 5px;
+            height: 300px;
+            width: 300px;
+            border-radius: 50%;
+            box-shadow: 0px 0px 20px aqua;
+            background-color: #e6e3e3;
+            position: relative;
+        }
+        .twelve{
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translate(-50%,0%);
+        }
+        .three{
+            position: absolute;
+            top: 50%;
+            right: 5%;
+            transform: translate(0%,-50%);
+        }
+        .six{
+            position: absolute;
+            bottom: 5%;
+            left: 50%;
+            transform: translate(-50%,0%);
+        }
+        .nine{
+            position: absolute;
+            top: 50%;
+            left: 5%;
+            transform: translate(0%,-50%);
+        }
+        #hour{
+            background-color: red;
+            height: 90px;
+            width: 10px;
+            bottom: 50%;
+            position: absolute;
+            z-index: 1;
+            transition: transform 0.0001s linear;
+            transform-origin: bottom center;
+            transform-style: preserve-3d;
+            border-radius: 50%;
+            transform:rotate(0deg);
+        }
+        #min{
+            background-color: green;
+            height: 110px;
+            width: 10px;
+            bottom: 50%;
+            position: absolute;
+            z-index: 1;
+            transition: transform 0.0001s linear;
+            transform-origin: bottom center;
+            transform-style: preserve-3d;
+            border-radius: 50%;
+            transform:rotate(30deg);
+        }
+        #sec{
+            background-color: lightblue;
+            height: 120px;
+            width: 10px;
+            bottom: 50%;
+            position: absolute;
+            z-index: 1;
+            transition: transform 0.0001s linear;
+            transform-origin: bottom center;
+            transform-style: preserve-3d;
+            border-radius: 50%;
+            transform:rotate(60deg);
+        }
+        #load{
+            background-color: black;
+            height: 100%;
+            width: 100%;
+            z-index: 4;
+            position: absolute;
+        }
+        pre{
+            color: white;
+            font-size: 50px;
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+    </style>
+</head>
+<body>
+    <div id="clock">
+        <div class="twelve">12</div>
+        <div class="three">3</div>
+        <div class="six">6</div>
+        <div class="nine">9</div>
+    </div>
+    <div id="hour"></div>
+    <div id="min"></div>
+    <div id="sec"></div>
+    <div id="load">
+        <pre>𝓐𝓷𝓪𝓵𝓸𝓰 𝓒𝓵𝓸𝓬𝓴</pre>
+    </div>
+</body>
+<script>
+    setTimeout(load,1);
+    function load(){
+        document.getElementById("load").style.display="block";
+    }
+    setTimeout(load1,1000);
+    function load1(){
+        document.getElementById("load").style.display="none";
+    }
+    //xyz
+    setInterval(time,1000);
+    function time(){
+        var date=new Date();
+        var sec=date.getSeconds();
+        var ds=sec*6;
+        var min=date.getMinutes();
+        var dm=min*6;
+        var hour=date.getHours();
+        var hourinsec=hour*3600;
+        var mininsec=min*60;
+        var totalsec=hourinsec+mininsec+sec;
+        var degh=1/120;
+        var dh=totalsec*degh;
+        document.getElementById("sec").style.transform="rotate("+ds+"deg)";
+        document.getElementById("min").style.transform="rotate("+dm+"deg)";
+        document.getElementById("hour").style.transform="rotate("+dh+"deg)";
+    }
+</script>
+</html>
